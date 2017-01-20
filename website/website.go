@@ -8,6 +8,7 @@ import (
 	"../config"
 	"../database"
 	"html/template"
+	"github.com/qiniu/log"
 )
 
 var db *database.Database
@@ -44,7 +45,11 @@ func startHttpServer(){
 	http.HandleFunc("/", indexHandler)
 
 	//listen on port 8080
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", nil)
+	
+	if err != nil{
+		log.Fatal(err)
+	}
 }
 
 
